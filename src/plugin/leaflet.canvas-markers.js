@@ -170,6 +170,18 @@ function layerFactory(L) {
             var offset = this._map._latLngBoundsToNewLayerBounds(this._map.getBounds(), event.zoom, event.center).min;
 
             L.DomUtil.setTransform(this._canvas, offset, scale);
+
+            // Dodaj animację zmiany rozmiaru ikony
+        this._markers.all().forEach(function(marker) {
+            if (marker.data.options.icon && marker.data.options.icon.options) {
+                var iconSize = marker.data.options.icon.options.iconSize;
+                var scaledSize = [iconSize[0] * scale, iconSize[1] * scale];
+                marker.data.options.icon.options.iconSize = scaledSize;
+            }
+        });
+
+        // Przerysuj warstwę po zmianie rozmiaru ikon
+        this._redraw(true);
         },
 
         _addMarker: function(marker,latlng,isDisplaying) {
