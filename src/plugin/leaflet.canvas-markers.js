@@ -171,16 +171,11 @@ function layerFactory(L) {
 
             L.DomUtil.setTransform(this._canvas, offset, scale);
 
-            // Dodaj animację zmiany rozmiaru ikony
-        this._markers.all().forEach(function(marker) {
-            if (marker.data.options.icon && marker.data.options.icon.options) {
-                var iconSize = marker.data.options.icon.options.iconSize;
-                var scaledSize = [iconSize[0] * scale, iconSize[1] * scale];
-                marker.data.options.icon.options.iconSize = scaledSize;
-            }
-        });
+            // Zastosuj transformację CSS do płynnego powiększania/pomniejszania ikon
+        this._canvas.style.transformOrigin = 'top left';
+        this._canvas.style.transform = 'scale(' + scale + ')';
 
-        // Przerysuj warstwę po zmianie rozmiaru ikon
+        // Przerysuj warstwę po zmianie transformacji CSS
         this._redraw(true);
         },
 
