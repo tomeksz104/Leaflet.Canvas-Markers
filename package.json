@@ -11,7 +11,6 @@
     "build:test": "set NODE_ENV=test&& webpack",
     "build": "set NODE_ENV=prod&& webpack",
     "watch": "set NODE_ENV=test&& webpack --watch",
-    "prepublish": "npm run build"
   },
   "keywords": [
     "leaflet",
@@ -23,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eJuke/Leaflet.Canvas-Markers.git"
+    "url": "https://github.com/tomeksz104/Leaflet.Canvas-Markers.git"
   },
   "devDependencies": {
     "script-loader": "^0.7.2",
