@@ -166,12 +166,35 @@ function layerFactory(L) {
         },
 
         _animateZoom: function(event) {
-            var scale = this._map.getZoomScale(event.zoom);
-            var offset = this._map._latLngBoundsToNewLayerBounds(this._map.getBounds(), event.zoom, event.center).min;
+        var self = this;
+        var startZoom = self._map.getZoom();
+        var endZoom = event.zoom;
+        var startTime = Date.now();
+        var duration = 300; // czas trwania animacji w milisekundach
 
-           L.DomUtil.setTransform(this._canvas, offset, scale);
+        function animate() {
+            var currentTime = Date.now();
+            var progress = Math.min((currentTime - startTime) / duration, 1);
+            var scale = self._calculateScale(startZoom, endZoom, progress);
 
-        },
+            var offset = self._map._latLngBoundsToNewLayerBounds(self._map.getBounds(), event.zoom, event.center).min;
+
+            L.DomUtil.setTransform(self._canvas, offset, scale);
+
+            self._redraw(true);
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        animate();
+    },
+
+    _calculateScale: function(startZoom, endZoom, progress) {
+        // Funkcja interpolacji liniowej do płynnego skalowania
+        return 1 + (endZoom - startZoom) * progress;
+    },
 
         _addMarker: function(marker,latlng,isDisplaying) {
 
