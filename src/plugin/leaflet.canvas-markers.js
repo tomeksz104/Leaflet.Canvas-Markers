@@ -165,24 +165,12 @@ function layerFactory(L) {
             this._redraw(true);
         },
 
-        //  _animateZoom: function(event) {
-        //     var scale = this._map.getZoomScale(event.zoom);
-        //     var offset = this._map._latLngBoundsToNewLayerBounds(this._map.getBounds(), event.zoom, event.center).min;
+        _animateZoom: function(event) {
+            var scale = this._map.getZoomScale(event.zoom);
+            var offset = this._map._latLngBoundsToNewLayerBounds(this._map.getBounds(), event.zoom, event.center).min;
 
-        //     L.DomUtil.setTransform(this._canvas, offset, scale);
-        // },
-
-         _animateZoom: function (e) {
-        var scale = this._map.getZoomScale(e.zoom),
-            offset = this._map._getCenterOffset(e.center)._multiplyBy(-scale).subtract(this._map._getMapPanePos());
-
-        if (L.DomUtil.setTransform) {
             L.DomUtil.setTransform(this._canvas, offset, scale);
-
-        } else {
-            this._canvas.style[L.DomUtil.TRANSFORM] = L.DomUtil.getTranslateString(offset) + ' scale(' + scale + ')';
-        }
-    }
+        },
 
         _addMarker: function(marker,latlng,isDisplaying) {
 
