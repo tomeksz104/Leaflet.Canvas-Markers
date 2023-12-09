@@ -333,20 +333,12 @@ function layerFactory(L) {
 
             var mapBounds = self._map.getBounds();
 
-            // Dodaj pewną odległość do granic widoczności mapy
-var extraDistance = 0.2; // Zmodyfikuj według własnych potrzeb
-var extraBounds = L.latLngBounds([
-    [mapBounds.getSouth() - extraDistance, mapBounds.getWest() - extraDistance],
-    [mapBounds.getNorth() + extraDistance, mapBounds.getEast() + extraDistance]
-]);
-
-// Ustawienia obszaru, który obejmuje granice widoczności mapy z dodatkową odległością
-var mapBoxCoords = {
-    minX: extraBounds.getWest(),
-    minY: extraBounds.getSouth(),
-    maxX: extraBounds.getEast(),
-    maxY: extraBounds.getNorth(),
-};
+                var mapBoxCoords = {
+                minX: mapBounds.getWest(),
+                minY: mapBounds.getSouth(),
+                maxX: mapBounds.getEast(),
+                maxY: mapBounds.getNorth(),
+            };
 
             self._latlngMarkers.search(mapBoxCoords).forEach(function (e) {
 
