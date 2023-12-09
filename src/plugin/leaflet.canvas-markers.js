@@ -169,7 +169,7 @@ function layerFactory(L) {
             var scale = this._map.getZoomScale(event.zoom);
             var offset = this._map._latLngBoundsToNewLayerBounds(this._map.getBounds(), event.zoom, event.center).min;
 
-           
+           L.DomUtil.setTransform(this._canvas, offset, scale);
 
         },
 
