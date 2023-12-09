@@ -169,19 +169,8 @@ function layerFactory(L) {
             var scale = this._map.getZoomScale(event.zoom);
             var offset = this._map._latLngBoundsToNewLayerBounds(this._map.getBounds(), event.zoom, event.center).min;
 
-            L.DomUtil.setTransform(this._canvas, offset, scale);
+           
 
-            // Ustaw tryb mieszania globalCompositeOperation na 'copy'
-        this._context.globalCompositeOperation = 'copy';
-
-        // Przeskaluj cały canvas
-        this._context.scale(scale, scale);
-
-        // Przywróć tryb mieszania globalCompositeOperation do 'source-over'
-        this._context.globalCompositeOperation = 'source-over';
-
-        // Przerysuj warstwę po zmianie rozmiaru
-        this._redraw(true);
         },
 
         _addMarker: function(marker,latlng,isDisplaying) {
