@@ -171,11 +171,16 @@ function layerFactory(L) {
 
             L.DomUtil.setTransform(this._canvas, offset, scale);
 
-            // Zastosuj transformację CSS do płynnego powiększania/pomniejszania ikon
-        this._canvas.style.transformOrigin = 'top left';
-        this._canvas.style.transform = 'scale(' + scale + ')';
+            // Ustaw tryb mieszania globalCompositeOperation na 'copy'
+        this._context.globalCompositeOperation = 'copy';
 
-        // Przerysuj warstwę po zmianie transformacji CSS
+        // Przeskaluj cały canvas
+        this._context.scale(scale, scale);
+
+        // Przywróć tryb mieszania globalCompositeOperation do 'source-over'
+        this._context.globalCompositeOperation = 'source-over';
+
+        // Przerysuj warstwę po zmianie rozmiaru
         this._redraw(true);
         },
 
