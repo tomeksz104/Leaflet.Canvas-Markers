@@ -125,13 +125,7 @@ function layerFactory(L) {
             else map._panes.overlayPane.appendChild(this._canvas);
 
             map.on('moveend', this._reset, this);
-            map.on('resize',this._reset,this);
-
-             map.on('touchstart', this._reset,this);
-            map.on('touchmove', this._reset,this);
-            map.on('touchend', this._reset,this);
-            
-           
+            map.on('resize',this._reset,this);        
 
             map.on('click', this._executeListeners, this);
             map.on('mousemove', this._executeListeners, this);
@@ -148,14 +142,9 @@ function layerFactory(L) {
 
             map.off('click', this._executeListeners, this);
             map.off('mousemove', this._executeListeners, this);
-            
-            map.off('touchmove', this._reset,this); // TEST
 
             map.off('moveend', this._reset, this);
             map.off('resize',this._reset,this);
-
-            map.on('touchend', this._reset,this); // TEST
-
 
             if (map._zoomAnimated) {
                 map.off('zoomanim', this._animateZoom, this);
