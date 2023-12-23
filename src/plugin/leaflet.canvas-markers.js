@@ -32,7 +32,7 @@ function layerFactory(L) {
 
             markers.forEach(function (marker) {
 
-                if (!((marker.options.pane == 'markerPane') && marker.options.icon))
+                if (!((marker.options.pane == 'customPane') && marker.options.icon))
                 {
                     console.error('Layer isn\'t a marker');
                     return;
